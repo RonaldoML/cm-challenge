@@ -19,7 +19,7 @@ function App() {
         <Layout />
       </QueryClientProvider>
     </BrowserRouter>
-  )
+  );
 }
 
 export default App;
