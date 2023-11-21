@@ -29,15 +29,15 @@ export const refineTitle = (title: string) => {
 export const refineGenres = (genre: [string]) => {
   const genreArr = genre.slice(0, 2).join("/");
   return `${genreArr}...`;
-}
+};
 
 export const seasons = {
   WINTER: { name: "Winter", img: winter },
   SPRING: { name: "Spring", img: spring },
   SUMMER: { name: "Summer", img: summer },
   FALL: { name: "Fall", img: fall },
-}
+};
 
 export const isArrayWithLength = (array: unknown) => {
   return Array.isArray(array) && array.length;
-}
+};

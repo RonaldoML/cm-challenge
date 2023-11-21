@@ -25,6 +25,7 @@ export type Media = {
   coverImage: CoverImage,
   bannerImage: string,
   description: string,
+  favorite: boolean,
 };
 
 export type Favorites = Media & {
@@ -42,4 +43,12 @@ export type PageInfo = {
 export type MediaResponse = {
   pageInfo: PageInfo,
   media: [Media],
+}
+
+export type DataState = {
+  page: number,
+  favorites: [Media] | null,
+  media: MediaResponse | null,
+  isLoading: false,
+  isError: false,
 }
