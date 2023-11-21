@@ -1,7 +1,11 @@
-type date = {
+export type Date = {
   year: string,
   month: string,
   day: string,
+}
+
+type CoverImage = {
+  large: string
 }
 
 export type Media = {
@@ -11,12 +15,12 @@ export type Media = {
   },
   type: string,
   genres: [string],
-  startDate: date,
-  endDate: date,
+  startDate: Date,
+  endDate: Date,
   season: string,
   episodes: number | null,
   chapters: number | null,
-  bannerImage: string,
+  coverImage: CoverImage,
   description: string,
 };
 
@@ -34,5 +38,5 @@ export type PageInfo = {
 
 export type MediaResponse = {
   pageInfo: PageInfo,
-  media: Media
+  media: [Media],
 }

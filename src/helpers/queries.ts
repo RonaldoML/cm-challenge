@@ -12,7 +12,7 @@ query ($page: Int, $perPage: Int, $search: String) {
       id
       title {
         romaji
-        english
+        romaji
         native
       }
       type
@@ -30,7 +30,10 @@ query ($page: Int, $perPage: Int, $search: String) {
       season
       episodes
       chapters
-      bannerImage
+      coverImage {
+        large
+        color
+      }
       description 
     }
   }
