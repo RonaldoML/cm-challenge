@@ -34,6 +34,7 @@ query ($page: Int, $perPage: Int, $search: String) {
         large
         color
       }
+      bannerImage
       description 
     }
   }

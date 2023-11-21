@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { mediaQuery } from "../helpers/queries";
 import { MediaResponse } from '../helpers/types';
+import { useLocalStorage } from "./useLocalStorage";
 
 
 export function useGetData(search: string, page: number) {
-  const [data, setData] = useState<MediaResponse | null>(null);
+  const { setItem, getItem, removeItem } = useLocalStorage("media");
+  const [data, setData] = useState<MediaResponse | null>(getItem());
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+
 
 
   useEffect(() => {
@@ -37,6 +40,8 @@ export function useGetData(search: string, page: number) {
         const resp = await result.json();
         if (resp.data) {
           setData(resp.data.Page);
+          removeItem();
+          setItem(resp.data.Page);
         }
         if (resp.errors) {
           setIsError(true);
@@ -48,7 +53,7 @@ export function useGetData(search: string, page: number) {
         setIsLoading(false);
       }
     }
-    getData();
+    if (search) getData();
   }, [search, page]);
 
 

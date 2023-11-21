@@ -8,6 +8,8 @@ type CoverImage = {
   large: string
 }
 
+export type Season = "WINTER" | "SUMMER" | "SPRING" | "FALL" | undefined;
+
 export type Media = {
   id: number,
   title: {
@@ -17,10 +19,11 @@ export type Media = {
   genres: [string],
   startDate: Date,
   endDate: Date,
-  season: string,
+  season: Season,
   episodes: number | null,
   chapters: number | null,
   coverImage: CoverImage,
+  bannerImage: string,
   description: string,
 };
 
