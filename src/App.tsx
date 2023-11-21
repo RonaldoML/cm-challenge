@@ -1,4 +1,4 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 import { Layout } from "./pages/Layout";
 
@@ -19,7 +19,7 @@ function App() {
         <Layout />
       </QueryClientProvider>
     </BrowserRouter>
-  );
+  )
 }
 
 export default App;

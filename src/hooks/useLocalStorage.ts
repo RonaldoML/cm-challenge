@@ -13,6 +13,7 @@ export const useLocalStorage = (key: string) => {
       return item ? JSON.parse(item) : undefined;
     } catch (error) {
       console.log(error);
+      return null;
     }
   };
 

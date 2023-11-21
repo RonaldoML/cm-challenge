@@ -16,19 +16,21 @@ export const PaginationBar = ({
   pageInfo,
 }: PaginationBarProps) => {
 
-  if (!pageInfo.total) return;
+  const moreThanMin = pageInfo.total > 15;
+
+  if (!pageInfo.total || !moreThanMin) return;
 
   return (
     <Container>
-      <Row className="col-md-1 mx-auto mt-3 position-relative">
-        {<Col onClick={handleLastPage} className="position-absolute top-50 start-0 translate-middle">
-          <img width={15} src={ArrowBack} />
+      <Row lg={4} className="col-md-1 mx-auto mt-3 position-relative">
+        {moreThanMin && <Col onClick={handleLastPage} className="position-absolute top-50 start-0 translate-middle">
+          <img width={17} src={ArrowBack} />
         </Col>}
-        {pageInfo.currentPage && <Col className="position-absolute top-50 start-50 translate-middle">
-          <p className="mt-3">{pageInfo.currentPage}</p>
+        {pageInfo.currentPage && <Col className="position-absolute top-50 start-50 translate-middle text-center">
+          <p className="mt-3 pl-3">{pageInfo.currentPage}</p>
         </Col>}
-        {<Col onClick={handleNextPage} className="position-absolute top-50 start-100 translate-middle">
-          <img width={15} src={ArrowNext} />
+        {moreThanMin && <Col onClick={handleNextPage} className="position-absolute top-50 start-100 translate-middle">
+          <img width={17} src={ArrowNext} />
         </Col>}
       </Row>
     </Container>
