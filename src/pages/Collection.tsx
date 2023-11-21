@@ -6,7 +6,6 @@ import { PaginationBar } from "../components/PaginationBar";
 import { Input } from "../components/Input";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { FetchMessage } from "../components/FetchMessage";
-import { Container } from "react-bootstrap";
 
 export const Collection = () => {
   const { getItem: getSavedSearch, setItem: saveSearch } = useLocalStorage("search");
