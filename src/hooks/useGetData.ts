@@ -35,7 +35,6 @@ export function useGetData(search: string, page: number) {
           headers
         })
         const resp = await result.json();
-        console.log(resp)
         if (resp.data) {
           setData(resp.data.Page);
         }
