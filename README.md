@@ -27,4 +27,4 @@ npm install
 npm run dev
 ```
 
-5. whatch results
+5. watch results
