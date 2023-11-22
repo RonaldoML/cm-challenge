@@ -24,7 +24,7 @@ npm install
 ```
 
 ```bash
-npm run start:dev
+npm run dev
 ```
 
 5. whatch results
