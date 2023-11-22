@@ -8,7 +8,7 @@ The data is set on providers/data.ts file
 1. First, clone the repo
 
 ```bash
-git clone https://github.com/RonaldoML/commit-history.git
+git clone https://github.com/RonaldoML/cm-challenge.git
 ```
 
 2. Enter to repository directory
