@@ -41,3 +41,8 @@ export const seasons = {
 export const isArrayWithLength = (array: unknown) => {
   return Array.isArray(array) && array.length;
 };
+
+export const types = {
+  ANIME: "Anime",
+  MANGA: "Manga",
+}

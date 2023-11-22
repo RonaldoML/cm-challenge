@@ -9,19 +9,19 @@ type CoverImage = {
 }
 
 export type Season = "WINTER" | "SUMMER" | "SPRING" | "FALL" | undefined;
+export type Type = "MANGA" | "ANIME";
 
 export type Media = {
   id: number,
   title: {
     romaji: string,
   },
-  type: string,
+  type: Type,
   genres: [string],
   startDate: Date,
   endDate: Date,
   season: Season,
   episodes: number | null,
-  chapters: number | null,
   coverImage: CoverImage,
   bannerImage: string,
   description: string,
@@ -46,9 +46,6 @@ export type MediaResponse = {
 }
 
 export type DataState = {
-  page: number,
   favorites: [Media] | null,
-  media: MediaResponse | null,
-  isLoading: false,
-  isError: false,
+  response: MediaResponse | null,
 }

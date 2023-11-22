@@ -1,7 +1,10 @@
 import { useContext } from "react";
+
 import { CardList } from "../components/CardList";
 import { FetchMessage } from "../components/FetchMessage";
+
 import { DataContext } from "../context/DataContext";
+
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export const Favorites = () => {
@@ -11,12 +14,15 @@ export const Favorites = () => {
   const { favorites } = state;
 
   const favs = getItem() || favorites;
-
-  if (!favs) return <FetchMessage noResults />
   return (
-    <>
-      <h1>Favorites</h1>
-      <CardList media={favs} />
-    </>
+    <section className="mb-5">
+      <h2 className="mt-4 mb-3">Favorites</h2>
+      {
+        !favs ? <FetchMessage noResults />
+          :
+          <CardList media={favs} />
+
+      }
+    </section>
   )
 }

@@ -1,4 +1,5 @@
 import { Container } from 'react-bootstrap';
+
 import { Route, Routes } from 'react-router-dom';
 import { Collection } from '../pages/Collection';
 import { Favorites } from '../pages/Favorites';

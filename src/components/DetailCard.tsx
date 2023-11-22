@@ -1,7 +1,10 @@
-import { Card } from 'react-bootstrap';
-import { Media } from '../helpers/types';
 import { useState } from 'react';
+
+import { Card } from 'react-bootstrap';
+
 import { DetailModal } from './DetailModal';
+
+import { Media } from '../helpers/types';
 import { refineGenres, refineTitle } from '../utils/utils';
 import HearOutline from '../assets/favorite.svg';
 import HearChecked from '../assets/heart_check.svg';
@@ -21,6 +24,7 @@ export const DetailCard = ({
   episodes,
   bannerImage,
   favorite,
+  type,
   handleFavorite,
 }: DetailCardProps) => {
 
@@ -35,17 +39,18 @@ export const DetailCard = ({
   return (
     <>
       <Card>
-        <Card.Img variant="top" src={coverImage.large} height={350} />
+        <Card.Img variant="top" src={coverImage.large} height={300} className="border-bottom" />
         <Card.Body>
-          <article style={{ display: "flex", justifyContent: "space-between" }}>
+          <article className="d-flex justify-content-between">
             <Card.Title style={{ minWidth: "90%" }}>{refineTitle(title.romaji)}</Card.Title>
             <Card.Img className="mt-1" src={favoriteImg} height={17} alt="favorite" onClick={handleFavorite} />
           </article>
           <Card.Subtitle className="mb-2 text-muted">{refineGenres(genres)}</Card.Subtitle>
-          <Card.Link onClick={handleOpenModal} className='fs-6' style={{ cursor: "pointer" }}>More</Card.Link>
+          <Card.Link onClick={handleOpenModal} className='fs-7' style={{ cursor: "pointer" }}>More</Card.Link>
         </Card.Body>
       </Card >
       <DetailModal
+        type={type}
         modalShow={openModal}
         onHide={handleOpenModal}
         title={title.romaji}

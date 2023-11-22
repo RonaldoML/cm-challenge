@@ -19,5 +19,5 @@ export const FetchMessage = ({ isLoading, isError, noResults }: FetchMessageProp
   }
   if (!isLoading && !isError) return;
 
-  return (<Container className="text-center">{message}</Container>)
+  return (<Container className="text-center mb-3">{message}</Container>)
 }

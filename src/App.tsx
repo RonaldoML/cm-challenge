@@ -1,5 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
+
 import { Layout } from "./pages/Layout";
+
 import { DataProvider } from './context/DataProvider';
 
 function App() {
