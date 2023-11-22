@@ -14,9 +14,12 @@ type DisplayCollectionsProps = {
 
 export const DisplayCollections = ({ setPage, page }: DisplayCollectionsProps) => {
   const { setItem } = useLocalStorage("page");
+  const { getItem: getMedia } = useLocalStorage("media");
 
   const { state } = useContext(DataContext);
   const { response } = state;
+
+  const data = getMedia() || response;
 
   const handleLastPage = () => {
     const nextPage = page - 1 === 0 ? 1 : page - 1;
@@ -25,19 +28,19 @@ export const DisplayCollections = ({ setPage, page }: DisplayCollectionsProps) =
   };
 
   const handleNextPage = () => {
-    const next = response?.pageInfo.hasNextPage && (page < 4) ? page + 1 : 1;
+    const next = data?.pageInfo.hasNextPage && (page < 4) ? page + 1 : 1;
     setPage(next);
     setItem(next);
   };
 
-  if (!response) return;
+  if (!data) return;
   return (
     <section>
-      <CardList media={response.media} />
+      <CardList media={data.media} />
       <PaginationBar
         handleLastPage={handleLastPage}
         handleNextPage={handleNextPage}
-        pageInfo={response.pageInfo}
+        pageInfo={data.pageInfo}
       />
     </section>
   )
