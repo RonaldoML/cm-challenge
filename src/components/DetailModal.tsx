@@ -1,6 +1,7 @@
 import { Card, Modal } from 'react-bootstrap';
-import { Date, Season } from '../helpers/types';
-import { refineDate, refineDescription, seasons } from '../utils/utils';
+
+import { Date, Season, Type } from '../helpers/types';
+import { refineDate, refineDescription, seasons, types } from '../utils/utils';
 
 
 type MoreModalProps = {
@@ -14,9 +15,11 @@ type MoreModalProps = {
   episodes: number | null,
   bannerImage: string,
   genres: [string],
+  type: Type
 }
 
 export const DetailModal = ({
+  type,
   modalShow,
   title,
   onHide,
@@ -49,12 +52,23 @@ export const DetailModal = ({
           <img src={bannerImage} alt={title} width={"100%"} className="rounded-1 mb-2 border border-dark" />
         )}
         {description && (
-          <Card.Subtitle className="mb-2">{refineDescription(description)}</Card.Subtitle>
+          <Card.Text className="mb-2">{refineDescription(description)}</Card.Text>
         )}
-        {genres && <Card.Text className="mb-2">{genres.join("/")}</Card.Text>}
-        <Card.Text className='fs-6 mb-2'>Emitted from {refineDate(dateStart)} to {refineDate(dateEnd)}</Card.Text>
-        <Card.Text className="mb-2">Season: <img src={img} alt={name} width={15} className="mb-1" /> {name}</Card.Text>
-        {episodes && (<Card.Text className="mb-2"> Episodes: {episodes}</Card.Text>)}
+        <Card.Text className="mb-2"><span className='fw-bolder'>Type: </span>{types[type]}</Card.Text>
+        {genres && (
+          <Card.Text className="mb-2"><span className='fw-bolder'>Genres: </span>{genres.join("/")}</Card.Text>
+        )}
+        <Card.Text className="mb-2">
+          <span className='fw-bolder'>Season: </span>
+          <img src={img} alt={name} width={15} className="mb-1 mr-1" />
+          {name}
+        </Card.Text>
+        {episodes && (
+          <Card.Text className="mb-2"><span className='fw-bolder'>Episodes: </span>{episodes}</Card.Text>
+        )}
+        <Card.Text className='fs-6 mb-2'>
+          Emitted from {refineDate(dateStart)} to {refineDate(dateEnd)}
+        </Card.Text>
       </Modal.Body>
     </Modal>
   )

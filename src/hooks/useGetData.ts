@@ -1,16 +1,21 @@
-import { useEffect, useState } from "react";
-import { mediaQuery } from "../helpers/queries";
-import { MediaResponse } from '../helpers/types';
+import { useContext, useEffect, useState } from "react";
+
+import { DataContext } from "../context/DataContext";
+
 import { useLocalStorage } from "./useLocalStorage";
+
+import { mediaQuery } from "../helpers/queries";
 
 
 export function useGetData(search: string, page: number) {
-  const { setItem, getItem, removeItem } = useLocalStorage("media");
-  const [data, setData] = useState<MediaResponse | null>(getItem());
+  const { setItem, removeItem } = useLocalStorage("media");
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
+  const { addData } = useContext(DataContext);
 
+  const controller = new AbortController();
+  const signal = controller.signal;
 
   useEffect(() => {
     const getData = async () => {
@@ -30,6 +35,7 @@ export function useGetData(search: string, page: number) {
         };
 
         const result = await fetch('https://graphql.anilist.co', {
+          signal,
           method: 'post',
           body: JSON.stringify({
             query: mediaQuery,
@@ -39,7 +45,7 @@ export function useGetData(search: string, page: number) {
         })
         const resp = await result.json();
         if (resp.data) {
-          setData(resp.data.Page);
+          addData(resp.data.Page);
           removeItem();
           setItem(resp.data.Page);
         }
@@ -54,8 +60,12 @@ export function useGetData(search: string, page: number) {
       }
     }
     if (search) getData();
+
+    return () => {
+      controller.abort()
+    }
   }, [search, page]);
 
 
-  return { data, isLoading, isError };
+  return { isLoading, isError };
 }

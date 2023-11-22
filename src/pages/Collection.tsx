@@ -1,34 +1,26 @@
-import { useGetData } from "../hooks/useGetData";
 import { useState } from "react";
 
-import { CardList } from "../components/CardList";
-import { PaginationBar } from "../components/PaginationBar";
 import { Input } from "../components/Input";
-import { useLocalStorage } from "../hooks/useLocalStorage";
 import { FetchMessage } from "../components/FetchMessage";
+import { DisplayCollections } from "../components/DisplayCollections";
+
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useGetData } from "../hooks/useGetData";
 
 export const Collection = () => {
+
+  //Get search and page values from Local storage
   const { getItem: getSavedSearch, setItem: saveSearch } = useLocalStorage("search");
-  const { getItem: getSavedPage, setItem: savePage } = useLocalStorage("page");
+  const { getItem: getSavedPage } = useLocalStorage("page");
 
   const [text, setText] = useState(getSavedSearch() ?? "");
   const [search, setSearch] = useState(text);
+
   const [page, setPage] = useState(getSavedPage() ?? 1);
 
-  const { data, isLoading, isError } = useGetData(search, page);
+  const { isLoading, isError } = useGetData(search, page);
 
-  const handleLastPage = () => {
-    const nextPage = page - 1 === 0 ? 1 : page - 1;
-    setPage(nextPage);
-    savePage(nextPage)
-  };
-
-  const handleNextPage = () => {
-    const next = data?.pageInfo.hasNextPage && (page < 4) ? page + 1 : 1;
-    setPage(next);
-    savePage(next);
-  };
-
+  //Fetch is done when press enter or click search button
   const handleSearch = () => {
     setSearch(text);
     setPage(1);
@@ -36,21 +28,12 @@ export const Collection = () => {
   }
 
   return (
-    <section className="mb-3">
+    <section className="mb-5 mt-4">
+      <h2>Collection</h2>
       <Input text={text} handleSearch={handleSearch} setText={setText} />
       {isLoading && <FetchMessage isLoading />}
       {isError && <FetchMessage isError />}
-      {
-        data?.media && (
-          <>
-            <CardList media={data.media} />
-            <PaginationBar
-              handleLastPage={handleLastPage}
-              handleNextPage={handleNextPage}
-              pageInfo={data.pageInfo}
-            />
-          </>)
-      }
+      <DisplayCollections page={page} setPage={setPage} />
     </section >
   )
 };

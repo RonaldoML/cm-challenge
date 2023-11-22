@@ -1,9 +1,14 @@
-import { Col, Row } from 'react-bootstrap';
-import { DetailCard } from './DetailCard';
-import { Media } from '../helpers/types';
 import { useContext } from 'react';
+
+import { Col, Row } from 'react-bootstrap';
+
+import { DetailCard } from './DetailCard';
+
 import { DataContext } from '../context/DataContext';
+
 import { useLocalStorage } from '../hooks/useLocalStorage';
+
+import { Media } from '../helpers/types';
 
 type CardListProps = {
   media: [Media],
@@ -43,7 +48,9 @@ export const CardList = ({ media }: CardListProps) => {
       {media.map((media: Media) => (
         <Col key={media.id}>
           <DetailCard
+            id={media.id}
             title={media.title}
+            type={media.type}
             coverImage={media.coverImage}
             genres={media.genres}
             description={media.description}
@@ -52,11 +59,11 @@ export const CardList = ({ media }: CardListProps) => {
             season={media.season}
             episodes={media.episodes}
             bannerImage={media.bannerImage}
-            favorite={!!favs?.find((fav: Media) => fav.id === media.id) || false}
+            favorite={!!favs?.find((fav: Media) => fav.id === media.id)}
             handleFavorite={() => handleFavorite(media.id)}
           />
         </Col>
       ))}
     </Row>
-  )
-}
+  );
+};

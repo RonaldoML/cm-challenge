@@ -2,14 +2,12 @@ import { useReducer } from 'react';
 
 import { DataContext } from './DataContext';
 import { DataReducer } from './DataReducer';
+
 import { DataState, Media, MediaResponse } from '../helpers/types';
 
 const INITIAL_STATE: DataState = {
-  page: 1,
   favorites: null,
-  media: null,
-  isLoading: false,
-  isError: false
+  response: null,
 }
 
 type ProviderProps = {
@@ -20,8 +18,8 @@ export const DataProvider = ({ children }: ProviderProps) => {
 
   const [state, dispatch] = useReducer(DataReducer, INITIAL_STATE);
 
-  const addData = (data: MediaResponse) => {
-    dispatch({ type: 'addMedia', payload: data })
+  const addData = (response: MediaResponse) => {
+    dispatch({ type: "addMedia", payload: response });
   };
 
   const addFavorites = (favs: [Media]) => {

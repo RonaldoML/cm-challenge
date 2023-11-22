@@ -4,7 +4,7 @@ type InputProps = {
   text: string,
   setText: (e: string) => void,
   handleSearch: () => void,
-}
+};
 
 export const Input = ({ text, setText, handleSearch }: InputProps) => {
 

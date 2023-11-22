@@ -1,8 +1,10 @@
 
 import { Col, Container, Row } from 'react-bootstrap';
+
+import { PageInfo } from '../helpers/types';
+
 import ArrowBack from "../assets/arrow_back.svg";
 import ArrowNext from "../assets/arrow_next.svg";
-import { PageInfo } from '../helpers/types';
 
 type PaginationBarProps = {
   handleLastPage: () => void,
