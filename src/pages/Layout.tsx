@@ -1,6 +1,11 @@
+import { NavBar } from "../components/Navbar";
+import { Router } from "../components/Router";
 
 export const Layout = () => {
   return (
-    <div>Layout</div>
-  )
-}
+    <section>
+      <NavBar />
+      <Router />
+    </section >
+  );
+};

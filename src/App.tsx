@@ -1,24 +1,17 @@
-import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
+
 import { Layout } from "./pages/Layout";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-    },
-  },
-});
-
+import { DataProvider } from './context/DataProvider';
 
 function App() {
 
   return (
-    <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
+    <DataProvider>
+      <BrowserRouter>
         <Layout />
-      </QueryClientProvider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </DataProvider>
   )
 }
 
