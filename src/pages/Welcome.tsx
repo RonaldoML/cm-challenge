@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 export const Welcome = () => {
   return (
-    <section className="mt-3">
+    <section className="mt-4">
       <h2>Welcome!!</h2>
 
       <p>Welcome to this Challenge project.</p>
