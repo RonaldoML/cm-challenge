@@ -1,8 +1,13 @@
+import { Container, Row } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 export const NotFound = () => {
   return (
-    <section className="d-flex align-items-center justify-content-center vh-100" >
-      <p className="align-self-center">404 | Page not found</p>
-    </section>
+    <Container className="d-flex align-items-center justify-content-center vh-100" >
+      <section>
+        <Row>404 | Page not found</Row>
+        <Row className="text-center"><NavLink to="/">Home</NavLink></Row>
+      </section>
+    </Container>
   );
 };
