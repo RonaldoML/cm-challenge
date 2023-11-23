@@ -1,4 +1,4 @@
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 
 import { Layout } from "./pages/Layout";
 
@@ -8,9 +8,9 @@ function App() {
 
   return (
     <DataProvider>
-      <BrowserRouter>
+      <HashRouter>
         <Layout />
-      </BrowserRouter>
+      </HashRouter>
     </DataProvider>
   )
 }
