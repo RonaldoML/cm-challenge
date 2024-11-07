@@ -20,12 +20,12 @@ export const PaginationBar = ({
 
   const moreThanMin = pageInfo.total > 15;
 
-  if (!pageInfo.total || !moreThanMin) return;
+  if (!moreThanMin) return;
 
   return (
     <Container>
       <Row lg={4} className="col-md-1 mx-auto mt-3 position-relative">
-        {moreThanMin && <Col onClick={handleLastPage} className="position-absolute top-50 start-0 translate-middle">
+        {moreThanMin && <Col onClick={handleLastPage} className="position-absolute top-50 start-0 translate-middle pointer">
           <img width={17} src={ArrowBack} />
         </Col>}
         {pageInfo.currentPage && <Col className="position-absolute top-50 start-50 translate-middle text-center">

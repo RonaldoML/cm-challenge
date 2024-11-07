@@ -6,6 +6,7 @@ import { useLocalStorage } from "./useLocalStorage";
 
 import { mediaQuery } from "../helpers/queries";
 
+const API_BASE_URL = "https://graphql.anilist.co";
 
 export function useGetData(search: string, page: number) {
   const { setItem, removeItem } = useLocalStorage("media");
@@ -14,15 +15,13 @@ export function useGetData(search: string, page: number) {
 
   const { addData } = useContext(DataContext);
 
-  const controller = new AbortController();
-  const signal = controller.signal;
-
   useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
     const getData = async () => {
       setIsLoading(true);
       setIsError(false);
       try {
-
         const variables = {
           search,
           page,
@@ -34,38 +33,38 @@ export function useGetData(search: string, page: number) {
           Accept: "application/json",
         };
 
-        const result = await fetch('https://graphql.anilist.co', {
+        const result = await fetch(API_BASE_URL, {
           signal,
-          method: 'post',
+          method: "POST",
           body: JSON.stringify({
             query: mediaQuery,
-            variables: variables
+            variables: variables,
           }),
-          headers
-        })
+          headers,
+        });
         const resp = await result.json();
-        if (resp.data) {
-          addData(resp.data.Page);
-          removeItem();
-          setItem(resp.data.Page);
-        }
-        if (resp.errors) {
+
+        if (!resp.ok || resp.errors) {
           setIsError(true);
         }
 
+        addData(resp.data.Page);
+        removeItem();
+        setItem(resp.data.Page);
+        setIsError(false);
       } catch (error) {
+        console.log(error);
         setIsError(true);
       } finally {
         setIsLoading(false);
       }
-    }
+    };
     if (search) getData();
 
     return () => {
-      controller.abort()
-    }
+      controller.abort();
+    };
   }, [search, page]);
-
 
   return { isLoading, isError };
 }

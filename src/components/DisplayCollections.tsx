@@ -6,6 +6,7 @@ import { PaginationBar } from './PaginationBar';
 import { DataContext } from '../context/DataContext';
 
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { FetchMessage } from './FetchMessage';
 
 type DisplayCollectionsProps = {
   setPage: (page: number) => void,
@@ -19,7 +20,7 @@ export const DisplayCollections = ({ setPage, page }: DisplayCollectionsProps) =
   const { state } = useContext(DataContext);
   const { response } = state;
 
-  const data = getMedia() || response;
+  const data = response || getMedia();
 
   const handleLastPage = () => {
     const nextPage = page - 1 === 0 ? 1 : page - 1;
@@ -34,6 +35,13 @@ export const DisplayCollections = ({ setPage, page }: DisplayCollectionsProps) =
   };
 
   if (!data) return;
+
+  if (data.media.length === 0) {
+    return (
+      <FetchMessage noResults />
+    )
+  }
+
   return (
     <section>
       <CardList media={data.media} />

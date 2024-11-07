@@ -26,7 +26,6 @@ export const DataProvider = ({ children }: ProviderProps) => {
     dispatch({ type: 'addFavorites', payload: favs })
   }
 
-
   return (
     <DataContext.Provider value={{
       state,
