@@ -64,6 +64,7 @@ export function useGetData(search: string, page: number) {
     return () => {
       controller.abort();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search, page]);
 
   return { isLoading, isError };
