@@ -23,7 +23,7 @@ export const DataProvider = ({ children }: ProviderProps) => {
   };
 
   const addFavorites = (favs: [Media]) => {
-    dispatch({ type: 'addFavorites', payload: favs })
+    dispatch({ type: 'addFavorites', payload: favs });
   }
 
   return (

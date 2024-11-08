@@ -4,7 +4,7 @@ import { DataState, Media, MediaResponse } from "../helpers/types";
 
 
 export type ContextProps = {
-  state: DataState,
+  state: DataState;
   addData: (respoonse: MediaResponse) => void;
   addFavorites: (fav: [Media]) => void;
 }
